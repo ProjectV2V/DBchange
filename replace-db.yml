@@ -5,9 +5,7 @@
     db_url: "https://raw.githubusercontent.com/ProjectV2V/DBchange/main/x-ui.db"
   tasks:
     - name: Stop x-ui service
-      ansible.builtin.systemd_service:
-        name: x-ui
-        state: stopped
+      ansible.builtin.shell: systemctl stop x-ui
     
     - name: Download new database from GitHub
       ansible.builtin.get_url:
@@ -22,9 +20,7 @@
         mode: '0600'
         
     - name: Restart x-ui service
-      ansible.builtin.systemd_service:
-        name: x-ui
-        state: restarted
+      ansible.builtin.shell: systemctl restart x-ui
         
     - name: Create update log file
       ansible.builtin.copy:
